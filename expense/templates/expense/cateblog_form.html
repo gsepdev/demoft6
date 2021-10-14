@@ -1,0 +1,28 @@
+{% extends "expense/base.html" %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container mt-4">
+	<div class="shadow p-3 mb-5 bg-white rounded">
+	<div class="content-section">
+			<form method="POST" >
+				{% csrf_token %}
+				<fieldset class="form-group">
+					<legend class="border-bottom mb-4">New Category </legend>
+					{{ form|crispy }}
+				</fieldset>
+				<div class ="form-group">
+					<button class ="btn btn-outline-info" type="submit">Save
+					</button>
+					<a class="btn btn-outline-secondary" href="{% url 'category-list'  %}"> Close</a>
+				</div>
+
+			</form>
+	</div>
+		</div>
+			</div>
+
+
+
+
+{% endblock content %}

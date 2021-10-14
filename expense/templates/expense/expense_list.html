@@ -1,0 +1,61 @@
+{% extends 'expense/base.html'%}
+{% load crispy_forms_tags %}
+{% block content %}
+<link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+<style >
+  .form-inline{
+    float:right
+  }
+</style>
+<div class="container mt-4">
+
+<div class="container">
+
+  <div class="shadow p-3 mb-5 bg-white rounded">
+<h1 class="page-header">Expense</h1>
+<form class="form-inline my-2  my-lg-0" method='GET' action="{% url 'search' %}">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search..." aria-label="Search" name='search'/>
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+
+<table class="table">
+  <thead>
+
+      <tr>
+        <th scope="col">#</th>
+          <th scope="col">Date</th>
+          <th scope="col">Description</th>
+          <th scope="col">Category Expense</th>
+          <th scope="col">Amount</th>
+          <th scope="col">Purchase Date</th>
+          <th scope="col">Payment Method</th>
+          <th scope="col">Action</th>
+      </tr>
+
+  </thead>
+  <tbody>
+    {% for expense in expenses %}
+    <tr>
+        <td> </td>
+      <td> {{expense.created_on|date:"F, d, Y" }}</td>
+      <td>   {{expense.description}}</td>
+      <td>   {{expense.category}}</td>
+        <td>   {{expense.amount}}</td>
+
+          <td>   {{expense.payment_date|date:"F, d, Y"}}</td>
+            <td>   {{expense.payment}}</td>
+          <td>
+            <a href="{% url 'expense-update' expense.id %}" class="btn text-secondary px-0">  <i class="far fa-edit fa-lg"></i></a>
+            <a class="delete" title="Delete" data-toggle="tooltip" href="{% url 'expense-delete' expense.id %}"><i class="far fa-trash-alt"></i></a>
+        
+
+          </td>
+
+    </tr>
+  {% endfor%}
+  </tbody>
+</table>
+</div>
+</div>
+</div>
+{% endblock %}

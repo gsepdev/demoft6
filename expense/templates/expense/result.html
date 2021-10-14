@@ -1,0 +1,99 @@
+
+
+{% extends "expense/base.html" %}
+{% block content %}
+
+    {% if results %}
+    <div class="container mt-4">
+        <h1>Search Results : <b>{{request.GET.query}}</b></h1>
+        <br/><br/>
+
+
+  </div>
+
+    <style >
+      .form-inline{
+        float:right
+      }
+    </style>
+    <div class="container mt-4">
+
+    <div class="container">
+
+      <div class="shadow p-3 mb-5 bg-white rounded">
+    <h1 class="page-header">Expense</h1>
+    <form method='GET' action="{% url 'search' %}" class="form-inline my-2  my-lg-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" 	name='search'/>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+
+    <table class="table">
+      <thead>
+
+          <tr>
+            <th scope="col">#</th>
+              <th scope="col">Date</th>
+              <th scope="col">Description</th>
+              <th scope="col">Category Expense</th>
+              <th scope="col">Amount</th>
+              <th scope="col">Purchase Date</th>
+              <th scope="col">Payment Method</th>
+
+
+          </tr>
+
+      </thead>
+      <tbody>
+    {% for result in results %}
+        <tr>
+          <a class="article-title" href="{{ result.get_absolute_url }}">
+            <td> </td>
+            <td> {{result.created_on|date:"F, d, Y" }}</td>
+          <td>   {{result.description}}</td>
+            <td>   {{result.category}}</td>
+            <td>   {{result.amount}}</td>
+
+
+              <td>   {{result.payment_date|date:"F, d, Y"}}</td>
+                <td>  {{result.payment}}</td>
+              <td>
+
+
+              </td>
+              <td>
+                <a href="#" class="btn text-secondary px-0">  <i class="far fa-edit fa-lg"></i></a>
+                <a class="delete" title="Delete" data-toggle="tooltip" href="#"><i class="far fa-trash-alt"></i></a>
+
+              </td>
+
+        </tr>
+      {% endfor%}
+      </tbody>
+    </table>
+    </div>
+    </div>
+    </div>
+
+    {% else %}
+            <div class="container mt-4">
+              <div class="row">
+                <div class="card m-auto">
+                  <div class="card-body mt2 mb-2">
+                    <h2 class="card-title">
+                      No results
+                    </h2>
+                    <p class="card-text">No results match your search criteria</p>
+                    <p>Try checking your spelling </p>
+                  </div>
+
+                </div>
+
+              </div>
+
+            </div>
+
+
+    {% endif %}
+
+
+{% endblock content %}

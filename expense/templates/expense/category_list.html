@@ -1,0 +1,65 @@
+
+{% extends 'expense/base.html'%}
+{% load crispy_forms_tags %}
+{% block content %}
+<link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+<style >
+  .form-inline{
+    float:right
+  }
+  .btn-success{
+  top:5px
+
+  }
+</style>
+<div class="container mt-4">
+<div class="shadow p-3 mb-5 bg-white rounded">
+<h1 class="page-header">Categories</h1>
+<div class="col-md-2 mt-4">
+  <a href="{% url 'add-category' %}" <button type="button" class="btn btn-success">Add Expenses</button></a>
+
+</div>
+<div class="container mt-4">
+<form class="form-inline my-2  my-lg-0" method='GET' action="{% url 'search-cate' %}">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search..." aria-label="Search" name='search'/>
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+  </form>
+
+<table class="table">
+  <thead>
+
+      <tr>
+        <th scope="col">#</th>
+
+          <th scope="col">Name</th>
+            <th scope="col">Action</th>
+      </tr>
+
+  </thead>
+  <tbody>
+    {% for category in categories%}
+    <tr>
+        <td> </td>
+
+      <td>   {{category.name}}</td>
+
+      <td>
+        <a href="{% url 'category-update' category.id %}" class="btn text-secondary px-0">  <i class="far fa-edit fa-lg"></i></a>
+        <a class="delete" title="Delete" data-toggle="tooltip" href="{% url 'category-delete' category.id %}"><i class="far fa-trash-alt"></i></a>
+
+      </td>
+
+
+
+    </tr>
+  {% endfor%}
+  </tbody>
+</table>
+</div>
+</div>
+<script
+  src="https://use.fontawesome.com/447a404cb2.js">
+
+</script>
+
+{% endblock %}

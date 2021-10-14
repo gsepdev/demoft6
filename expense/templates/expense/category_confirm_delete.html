@@ -1,0 +1,21 @@
+{% extends "expense/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container mt-4" ">
+  <div class="card">
+    <div class="card-header">
+        <h5 class="card-title">Delete category #{{object.id}}</h5>
+    </div>
+    <div class="card-body">
+        <form method="post">
+            {% csrf_token %}
+            <div class="alert alert-warning" role="alert">
+                Are you sure you want to delete <strong>{{ object.name }}</strong> ?
+            </div>
+            <button type="submit" class="btn btn-danger">Delete</button>
+            <a class="btn btn-outline-secondary" href="{% url 'category-list'  %}"> Cancel</a>
+        </form>
+    </div>
+</div>
+</div>
+{% endblock content %}
